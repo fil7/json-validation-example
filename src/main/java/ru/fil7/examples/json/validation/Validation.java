@@ -17,21 +17,20 @@ import java.util.Objects;
 
 public class Validation {
 
-    public static final String targetUrl = "http://dispatcher.netpoint-dc.com/sample.json";
+    public static final String DEFAULT_URL = "http://dispatcher.netpoint-dc.com/sample.json";
 
-    public static void main(String[] args){
+    public static void main(String[] args) {
         JsonNode jsonNode = getJson(args);
-
         // use default url
         if (args.length < 2) {
             System.out.println(String.format(
-                    "Is response code 200? %s", checkResponseCode(targetUrl, 200)));
+                    "Is response code 200? %s", checkResponseCode(DEFAULT_URL, 200)));
         } else if (args.length >= 2 && "-url".equalsIgnoreCase(args[0]) && Objects.nonNull(jsonNode)) {
             System.out.println(String.format(
                     "Is response code 200? %s", checkResponseCode(args[1], 200)));
         }
         if (Objects.nonNull(jsonNode)) {
-            boolean isValidJson = isResponseJsonValid(jsonNode);
+            isResponseJsonValid(jsonNode);
         }
     }
 
@@ -45,17 +44,17 @@ public class Validation {
         } catch (Exception e) {
             return false;
         }
-
     }
 
     public static boolean isResponseJsonValid(JsonNode json) {
         try {
             System.out.println("Validation of json...");
+
             JsonNode schema = JsonLoader.fromURL(Validation.class.getResource("/schema.json"));
             JsonSchema jsonSchema = JsonSchemaFactory.byDefault().getJsonSchema(schema);
             ProcessingReport report = jsonSchema.validate(json);
-            boolean isValidJson = report.isSuccess();
-            String result = isValidJson ? "Result: Valid json" : "Result: Invalid json";
+
+            String result = report.isSuccess() ? "Result: Valid json" : "Result: Invalid json";
             System.out.println(result);
             return report.isSuccess();
         } catch (IOException | ProcessingException e) {
@@ -79,8 +78,8 @@ public class Validation {
 
     private static JsonNode getJson(String[] args) {
         if (args.length < 2) {
-            System.out.println(String.format("Default url: %s", targetUrl));
-            return getJsonByUrl(targetUrl);
+            System.out.println(String.format("Default url: %s", DEFAULT_URL));
+            return getJsonByUrl(DEFAULT_URL);
         }
         if (args.length >= 2) {
             String key = args[0];
@@ -92,8 +91,7 @@ public class Validation {
                 case "-file":
                     File file = new File(value);
                     if (file.exists()) {
-                        System.out.println(String.format(
-                                "File %s was found", value));
+                        System.out.println(String.format("File %s was found", value));
                         try {
                             return JsonLoader.fromURL(file.toURI().toURL());
                         } catch (IOException e) {
