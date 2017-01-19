@@ -49,5 +49,12 @@ public class ResponseValidationTest {
         Assert.assertFalse(isResponseJsonValid(json));
     }
 
+    @Test
+    public void testForInvalidActionLink() throws Exception {
+        com.fasterxml.jackson.databind.JsonNode json =
+                JsonLoader.fromURL(ResponseValidationTest.class.getResource("/json/invalid-link.json"));
+        Assert.assertFalse(isResponseJsonValid(json));
+    }
+
 
 }

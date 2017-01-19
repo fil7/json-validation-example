@@ -49,7 +49,7 @@
                 },
                 "link": {
                   "type": "string",
-                  "pattern": "(https?:\/\/(?:www\\.|(?!www))[^\\s\\.]+\\.[^\\s]{2,}|www\\.[^\\s]+\\.[^\\s]{2,})"
+                  "pattern" : "(http|https):\/\/www.facebook.com\/X[0-9]{3}\/posts\/Y[0-9]{3}"
                 }
               },
               "required": [

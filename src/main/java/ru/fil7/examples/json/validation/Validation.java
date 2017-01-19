@@ -58,7 +58,7 @@ public class Validation {
             System.out.println(result);
             return report.isSuccess();
         } catch (IOException | ProcessingException e) {
-            System.out.println("Exception: Invalid json");
+            System.out.println(e.getMessage());
             return false;
         }
     }
