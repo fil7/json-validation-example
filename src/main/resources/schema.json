@@ -9,24 +9,48 @@
       "items": {
         "type": "object",
         "properties": {
-          "id": { "type": "string", "pattern": "\\X[0-9]{3}_Y[0-9]{3}"},
+          "id": {
+            "type": "string",
+            "pattern": "\\X[0-9]{3}_Y[0-9]{3}"
+          },
           "from": {
             "type": "object",
             "properties": {
-              "name": {"type": "string"},
-              "id": { "type": "string", "pattern": "\\X[0-9]+" },
-              "gender": { "enum": ["female", "male"] },
-              "age": { "type": "integer", "minimum": 13 }
+              "name": {
+                "type": "string"
+              },
+              "id": {
+                "type": "string",
+                "pattern": "\\X[0-9]+"
+              },
+              "gender": {
+                "enum": [
+                  "female",
+                  "male"
+                ]
+              },
+              "age": {
+                "type": "integer",
+                "minimum": 13
+              }
             }
           },
-          "message" : { "type" : "string" },
-          "actions" : {
+          "message": {
+            "type": "string"
+          },
+          "actions": {
             "type": "array",
             "items": {
               "type": "object",
               "properties": {
-                "name": {"type": "string", "pattern": "\\w+"},
-                "link": {"type": "string", "pattern" : "(https?:\/\/(?:www\\.|(?!www))[^\\s\\.]+\\.[^\\s]{2,}|www\\.[^\\s]+\\.[^\\s]{2,})"}
+                "name": {
+                  "type": "string",
+                  "pattern": "\\w+"
+                },
+                "link": {
+                  "type": "string",
+                  "pattern": "(https?:\/\/(?:www\\.|(?!www))[^\\s\\.]+\\.[^\\s]{2,}|www\\.[^\\s]+\\.[^\\s]{2,})"
+                }
               },
               "required": [
                 "name",
@@ -34,7 +58,9 @@
               ]
             }
           },
-          "type": { "type" : "string" },
+          "type": {
+            "type": "string"
+          },
           "created_time": {
             "type": "string",
             "format": "date-time"
@@ -44,7 +70,11 @@
             "format": "date-time"
           }
         },
-        "required": ["id", "from", "message"]
+        "required": [
+          "id",
+          "from",
+          "message"
+        ]
       }
     }
   }
