@@ -1,0 +1,51 @@
+{
+  "$schema": "http://json-schema.org/draft-04/schema#",
+  "title": "Message",
+  "description": "Message",
+  "type": "object",
+  "properties": {
+    "data": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "properties": {
+          "id": { "type": "string", "pattern": "\\X[0-9]{3}_Y[0-9]{3}"},
+          "from": {
+            "type": "object",
+            "properties": {
+              "name": {"type": "string"},
+              "id": { "type": "string", "pattern": "\\X[0-9]+" },
+              "gender": { "enum": ["female", "male"] },
+              "age": { "type": "integer", "minimum": 13 }
+            }
+          },
+          "message" : { "type" : "string" },
+          "actions" : {
+            "type": "array",
+            "items": {
+              "type": "object",
+              "properties": {
+                "name": {"type": "string", "pattern": "\\w+"},
+                "link": {"type": "string", "pattern" : "(https?:\/\/(?:www\\.|(?!www))[^\\s\\.]+\\.[^\\s]{2,}|www\\.[^\\s]+\\.[^\\s]{2,})"}
+              },
+              "required": [
+                "name",
+                "link"
+              ]
+            }
+          },
+          "type": { "type" : "string" },
+          "created_time": {
+            "type": "string",
+            "format": "date-time"
+          },
+          "updated_time": {
+            "type": "string",
+            "format": "date-time"
+          }
+        },
+        "required": ["id", "from", "message"]
+      }
+    }
+  }
+}
